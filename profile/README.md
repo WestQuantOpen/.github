@@ -2,9 +2,9 @@
 
 # WestQuant Open
 
-### Search the representation, not just the parameters.
+### Open infrastructure for AI x Quantum Algorithm Engineering
 
-**Open-source tools for efficient quantum computing — QPU minimization, representation search, and workflow optimization.**
+**Generate ML data from quantum programs. Compare software stacks. Search for better representations.**
 
 </div>
 
@@ -20,50 +20,25 @@
 
 </div>
 
-## What we do
+---
 
-Quantum processing units (QPUs) are scarce, expensive, and queued. WestQuant Open builds open-source tools that help quantum practitioners use QPU time more efficiently — and avoid it entirely where classical computation suffices.
+## What WestQuant Open does
 
-Our research shows that the required QPU budget is not a fixed algorithmic constant but a **structured, predictable function** of the problem instance and workflow policy:
+WestQuant Open is an open research infrastructure for generating machine-learning data from quantum programs, comparing quantum software stacks, and searching for better circuit representations and compilation strategies across frameworks and hardware targets.
+
+The unique layer:
 
 ```
-QPU_requirement = f(graph, problem, n, depth, quality_target, hardware)
+Quantum program -> representation -> transformation sequence -> hardware mapping -> result
 ```
 
-By separating classical parameter optimization from a single QPU evaluation, we achieve **510–2070× shot reduction** with **≤0.4% quality loss** across graph optimization problems.
+### Five things WestQuant can do
 
-## Projects
-
-### Core packages
-
-| Package | PyPI | Description |
-|---------|------|-------------|
-| **[westquant](https://github.com/WestQuantOpen/westquant)** | [![PyPI](https://img.shields.io/pypi/v/westquant)](https://pypi.org/project/westquant/) | Umbrella package — representation search |
-| **[westquant-core](https://github.com/WestQuantOpen/westquant-core)** | [![PyPI](https://img.shields.io/pypi/v/westquant-core)](https://pypi.org/project/westquant-core/) | WQIR, RepGraph, plugin contracts |
-| **[westquant-qcsc](https://github.com/WestQuantOpen/westquant-qcsc)** | [![PyPI](https://img.shields.io/pypi/v/westquant-qcsc)](https://pypi.org/project/westquant-qcsc/) | Semantic QPU Minimization optimizer |
-
-### Framework integrations
-
-| Package | PyPI | Description |
-|---------|------|-------------|
-| **[westquant-qiskit](https://github.com/WestQuantOpen/westquant-qiskit)** | [![PyPI](https://img.shields.io/pypi/v/westquant-qiskit)](https://pypi.org/project/westquant-qiskit/) | Qiskit transpiler plugins |
-| **[westquant-pytket](https://github.com/WestQuantOpen/westquant-pytket)** | [![PyPI](https://img.shields.io/pypi/v/westquant-pytket)](https://pypi.org/project/westquant-pytket/) | pytket compiler pass search |
-| **[westquant-pennylane](https://github.com/WestQuantOpen/westquant-pennylane)** | [![PyPI](https://img.shields.io/pypi/v/westquant-pennylane)](https://pypi.org/project/westquant-pennylane/) | PennyLane transform search |
-| **[westquant-pulser](https://github.com/WestQuantOpen/westquant-pulser)** | [![PyPI](https://img.shields.io/pypi/v/westquant-pulser)](https://pypi.org/project/westquant-pulser/) | Pulser neutral-atom search |
-
-### Infrastructure
-
-| Package | PyPI | Description |
-|---------|------|-------------|
-| **[westquant-orchestrator](https://github.com/WestQuantOpen/westquant-orchestrator)** | [![PyPI](https://img.shields.io/pypi/v/westquant-orchestrator)](https://pypi.org/project/westquant-orchestrator/) | Cross-framework normalization |
-| **[westquant-bridges](https://github.com/WestQuantOpen/westquant-bridges)** | [![PyPI](https://img.shields.io/pypi/v/westquant-bridges)](https://pypi.org/project/westquant-bridges/) | Cirq/Braket/QIR/OpenQASM bridges |
-
-### Research
-
-| Repo | Description |
-|------|-------------|
-| **[qpu-mini](https://github.com/WestQuantOpen/qpu-mini)** | Paper A — QPU-efficient quantum graph optimization experiments |
-| **[representation-stack](https://github.com/WestQuantOpen/representation-stack)** | Artifact #001 — Representation search for quantum optimization |
+1. **Generate ML training data** from quantum algorithms
+2. **Search representation/transformation schedules** across frameworks
+3. **Compare Qiskit / PennyLane / Cirq** compilation pipelines
+4. **Optimize circuits** for different hardware targets
+5. **Record complete transformation provenance** for reproducibility
 
 ## Quick start
 
@@ -78,7 +53,9 @@ result = optimize(circuit, framework="qiskit", backend=backend, budget=64)
 print(result.pareto_front)
 ```
 
-Or use the QPU budget predictor:
+### QPU Budget Predictor
+
+Estimate required QPU budget from problem structure — before any quantum execution:
 
 ```bash
 pip install westquant-qcsc
@@ -93,6 +70,75 @@ budget = predictor.estimate(profile)
 # 1024 shots, 2070x reduction vs naive, quality=0.9961
 ```
 
+## Packages
+
+### Core
+
+| Package | Description |
+|---------|-------------|
+| **[westquant](https://github.com/WestQuantOpen/westquant)** | Umbrella package — representation search |
+| **[westquant-core](https://github.com/WestQuantOpen/westquant-core)** | WQIR, RepGraph, plugin contracts |
+| **[westquant-qcsc](https://github.com/WestQuantOpen/westquant-qcsc)** | Semantic QPU Minimization + QPU Budget Predictor |
+
+### Framework integrations
+
+| Package | Description |
+|---------|-------------|
+| **[westquant-qiskit](https://github.com/WestQuantOpen/westquant-qiskit)** | Qiskit transpiler plugins |
+| **[westquant-pytket](https://github.com/WestQuantOpen/westquant-pytket)** | pytket compiler pass search |
+| **[westquant-pennylane](https://github.com/WestQuantOpen/westquant-pennylane)** | PennyLane transform search |
+| **[westquant-pulser](https://github.com/WestQuantOpen/westquant-pulser)** | Pulser neutral-atom search |
+
+### Infrastructure
+
+| Package | Description |
+|---------|-------------|
+| **[westquant-orchestrator](https://github.com/WestQuantOpen/westquant-orchestrator)** | Cross-framework normalization |
+| **[westquant-bridges](https://github.com/WestQuantOpen/westquant-bridges)** | Cirq/Braket/QIR/OpenQASM bridges |
+
+### Research
+
+| Repo | Description |
+|------|-------------|
+| **[qpu-mini](https://github.com/WestQuantOpen/qpu-mini)** | Paper A — QPU-efficient quantum graph optimization (510-2070x reduction) |
+| **[representation-stack](https://github.com/WestQuantOpen/representation-stack)** | Artifact #001 — Representation search for quantum optimization |
+
+## Architecture
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │          WestQuant Open Layer            │
+                    │                                         │
+                    │   Quantum program                        │
+                    │        │                                │
+                    │        ▼                                │
+                    │   ┌─────────┐    ┌──────────────┐       │
+                    │   │  WQIR   │───▶│  RepGraph    │       │
+                    │   │ (IR)    │    │  (search     │       │
+                    │   └────┬────┘    │   space)     │       │
+                    │        │         └──────┬───────┘       │
+                    │        ▼                │              │
+                    │   ┌─────────────┐        │              │
+                    │   │ Transform   │◀───────┘              │
+                    │   │ Registry    │                       │
+                    │   └─────┬───────┘                       │
+                    │         ▼                               │
+                    │   ┌─────────────┐    ┌──────────────┐   │
+                    │   │  Verifier   │───▶│  Planner     │   │
+                    │   └─────────────┘    └──────────────┘   │
+                    │         │                               │
+                    │         ▼                               │
+                    │   Optimized circuit + ML dataset +       │
+                    │   provenance trace + benchmark results  │
+                    └─────────────────────────────────────────┘
+                         ▲           ▲           ▲
+                    ┌────┴────┐ ┌────┴────┐ ┌────┴────┐
+                    │ Qiskit  │ │PennyLane │ │  Cirq   │
+                    └─────────┘ └─────────┘ └─────────┘
+```
+
+See [full architecture](https://github.com/WestQuantOpen/westquant/blob/main/docs/ARCHITECTURE.md).
+
 ## Design philosophy
 
 WestQuant asks three questions in order:
@@ -101,22 +147,59 @@ WestQuant asks three questions in order:
 2. **Does it need to be quantum?** (Replace with classical)
 3. **Only then: which resource should execute it?** (Schedule)
 
-That ordering is the defining idea of the project.
+## Research
+
+### Paper A (submitted)
+
+**Optimize the Optimization: QPU-Efficient Quantum Graph Optimization through HPC-First Experimentation**
+Submitted to IEEE Transactions on Quantum Engineering.
+
+Key finding: QPU requirement is a structured, predictable function of problem structure — not a fixed constant. 510-2070x shot reduction with ≤0.4% quality loss.
+
+### Paper B (under review)
+
+Systematic mapping review of QPU minimization and quantum workflow systems. Submitted to ACM Computing Surveys.
+
+### Upcoming: Technical Paper
+
+**WestQuantOpen: Cross-Framework Quantum Program Optimization, Representation Scheduling, and ML Dataset Generation**
+
+Four contributions:
+- Cross-framework abstraction (Qiskit, PennyLane, Cirq)
+- Transformation provenance (every step recorded)
+- ML dataset generation (before/after pairs, actions, metrics)
+- Representation-policy search (systematic transformation sequence search)
+
+## Benchmark corpus
+
+10 algorithm families, ~2,000 circuits:
+
+| Family | Sizes |
+|--------|-------|
+| GHZ | 4-100 qubits |
+| QFT | 3-30 |
+| Grover | 3-20 |
+| Bernstein-Vazirani | 4-50 |
+| QPE | 3-20 |
+| QAOA MaxCut | multiple graph families |
+| VQE ansatze | multiple molecules |
+| Trotter simulation | varying steps |
+| Quantum arithmetic | adders/multipliers |
+| Random Clifford | varying density |
+
+See [benchmarks](https://github.com/WestQuantOpen/westquant/blob/main/benchmarks/).
 
 ## Community
 
 - **Discussions:** [Join the conversation](https://github.com/orgs/WestQuantOpen/discussions)
-- **Issues:** Report bugs or request features on the relevant repo
 - **Contributing:** See [CONTRIBUTING.md](https://github.com/WestQuantOpen/.github/blob/main/CONTRIBUTING.md)
-- **Code of Conduct:** We follow the [Contributor Covenant](https://github.com/WestQuantOpen/.github/blob/main/CODE_OF_CONDUCT.md)
-
-## Releases
-
-Monthly releases on the last Friday of each month. See the [release schedule](https://github.com/WestQuantOpen/.github/blob/main/RELEASE_SCHEDULE.md).
+- **Code of Conduct:** See [CODE_OF_CONDUCT.md](https://github.com/WestQuantOpen/.github/blob/main/CODE_OF_CONDUCT.md)
+- **Releases:** Monthly on the last Friday — see [release schedule](https://github.com/WestQuantOpen/.github/blob/main/RELEASE_SCHEDULE.md)
+- **Project plan:** See [WQO_PROJECT_PLAN.md](https://github.com/WestQuantOpen/westquant/blob/main/WQO_PROJECT_PLAN.md)
 
 ## License
 
-Apache-2.0 (core packages) / MIT (qcsc). See individual repos for details.
+Apache-2.0 (core packages) / MIT (qcsc)
 
 ## Author
 
@@ -128,6 +211,6 @@ Apache-2.0 (core packages) / MIT (qcsc). See individual repos for details.
 
 <div align="center">
 
-**[⬆ Back to top](#westquant-open)**
+**[Back to top](#westquant-open)**
 
 </div>
